@@ -97,6 +97,7 @@ exports.getOneLecturer = async (req, res) => {
       error: error.message,
     });
   }
+}
 
   // PUT: update a lecturer by ID
 exports.updateLecturer = async (req, res) => {
@@ -152,4 +153,3 @@ exports.deleteLecturer = async (req, res) => {
   }
 };
 
-};
