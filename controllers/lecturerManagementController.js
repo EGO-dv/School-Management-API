@@ -97,4 +97,59 @@ exports.getOneLecturer = async (req, res) => {
       error: error.message,
     });
   }
+
+  // PUT: update a lecturer by ID
+exports.updateLecturer = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: "Invalid lecturer ID",
+      });
+    }
+
+    const lecturer = await lecturerModel.findByIdAndUpdate(id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!lecturer) {
+    return res.status(404).json({ message: "Lecturer not found" });
+    }
+
+    return res.status(200).json({
+      message: "Lecturer updated successfully",
+      data: lecturer,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// DELETE: delete a lecturer by ID
+exports.deleteLecturer = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: "Invalid lecturer ID",
+      });
+    }
+
+    const lecturer = await lecturerModel.findByIdAndDelete(id);
+
+    if (!lecturer) {
+    return res.status(404).json({ message: "Lecturer not found" });
+    }
+
+    return res.status(200).json({
+      message: "Lecturer deleted successfully",
+      data: lecturer,
+    });  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 };
