@@ -9,7 +9,9 @@ app.use(express.json())
 app.use(studentRoutes)
 
 
+const courseRegRouter = require("./routes/courseRegRouter");
 
+app.use("/registrations", courseRegRouter);
 
 
 app.listen(PORT,()=>{console.log(`My Application is running on port ${PORT}`)})
