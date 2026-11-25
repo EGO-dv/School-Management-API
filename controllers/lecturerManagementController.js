@@ -87,23 +87,22 @@ exports.getOneLecturer = async (req, res) => {
       });
     }
 
-    return res.status(200).json({
-      message: "Lecturer fetched successfully",
-      data: lecturer,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: "Internal server error",
-      error: error.message,
-    });
+      return res.status(200).json({
+        message: "Lecturer fetched successfully",
+        data: lecturer,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
   }
-}
 
   // PUT: update a lecturer by ID
 exports.updateLecturer = async (req, res) => {
   try {
-    const { id } = req.params;
-
+    const id = req.params.id;
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({
         message: "Invalid lecturer ID",
