@@ -12,9 +12,11 @@ app.use(express.json());
 const studentRoutes = require("./routes/studentRouter");
 const courseRouter = require("./routes/courseManagementRouter");
 const courseRegRouter = require("./routes/courseRegRouter");
+const lecturerRouter = require("./routes/lecturerRouter");
 
 app.use(studentRoutes);
 app.use(courseRouter);
+app.use(lecturerRouter); 
 app.use("/registrations", courseRegRouter);
 
 const PORT = process.env.PORT || 5050;
