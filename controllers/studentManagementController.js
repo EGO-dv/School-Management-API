@@ -82,12 +82,12 @@ exports.updateStudent = async(req, res)=>{
     const data ={
        email:req.body.email
     };
-    if (!student){
+    const update = await studentModel.findByIdAndUpdate(student,data,{new:true})
+    if (!update){
       return res.status(404).json({
         message:"Student not found"
       })
     }
-    const update = await studentModel.findByIdAndUpdate(student,data,{new:true})
     res.status(200).json({
       message:"student email updated Successfully",
       data:update
