@@ -87,19 +87,19 @@ exports.getOneLecturer = async (req, res) => {
       });
     }
 
-      return res.status(200).json({
-        message: "Lecturer fetched successfully",
-        data: lecturer,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        message: "Internal server error",
-        error: error.message,
-      });
-    }
+    return res.status(200).json({
+      message: "Lecturer fetched successfully",
+      data: lecturer,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Internal server error",
+      error: error.message,
+    });
   }
+}
 
-  // PUT: update a lecturer by ID
+// PUT: update a lecturer by ID
 exports.updateLecturer = async (req, res) => {
   try {
     const id = req.params.id;
@@ -115,7 +115,7 @@ exports.updateLecturer = async (req, res) => {
     });
 
     if (!lecturer) {
-    return res.status(404).json({ message: "Lecturer not found" });
+      return res.status(404).json({ message: "Lecturer not found" });
     }
 
     return res.status(200).json({
@@ -141,13 +141,14 @@ exports.deleteLecturer = async (req, res) => {
     const lecturer = await lecturerModel.findByIdAndDelete(id);
 
     if (!lecturer) {
-    return res.status(404).json({ message: "Lecturer not found" });
+      return res.status(404).json({ message: "Lecturer not found" });
     }
 
     return res.status(200).json({
       message: "Lecturer deleted successfully",
       data: lecturer,
-    });  } catch (error) {
+    });
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };

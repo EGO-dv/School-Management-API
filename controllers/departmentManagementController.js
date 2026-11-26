@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const departmentModel = require("../model/departmentManagementModel");
 
 // POST:Create a new department
@@ -14,9 +15,9 @@ exports.createDepartment = async (req, res) => {
 exports.getAllDepartments = async (req, res) => {
   try {
     const departments = await departmentModel.find();
-    if(!departments){
+    if (!departments) {
       return res.status(404).json({
-        message:"Deparrment does not exist"
+        message: "Deparrment does not exist"
       })
     }
 
@@ -24,8 +25,8 @@ exports.getAllDepartments = async (req, res) => {
       message: "Departments fetched successfully",
       count: departments.length,
       data: departments,
-    });  
-} catch (error) {
+    });
+  } catch (error) {
     return res.status(500).json({
       message: "Internal server error",
       error: error.message,
@@ -38,25 +39,25 @@ exports.getDepartmentById = async (req, res) => {
   try {
     const id = req.params.id;
     const department = await departmentModel.findById(id);
-    
+
     if (!department) {
       return res.status(404).json({
         message: "Department not found",
       });
     }
-     return res.status(200).json({
-        message: "Department fetched successfully",
-        data: department,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        message: "Internal server error",
-        error: error.message,
-      });
-    }
+    return res.status(200).json({
+      message: "Department fetched successfully",
+      data: department,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Internal server error",
+      error: error.message,
+    });
   }
+}
 
-  // PUT: update a department by ID
+// PUT: update a department by ID
 exports.updateDepartment = async (req, res) => {
   try {
     const id = req.params.id;
@@ -72,7 +73,7 @@ exports.updateDepartment = async (req, res) => {
     });
 
     if (!department) {
-    return res.status(404).json({ message: "Department not found" });
+      return res.status(404).json({ message: "Department not found" });
     }
 
     return res.status(200).json({
@@ -98,13 +99,14 @@ exports.deleteDepartment = async (req, res) => {
     const department = await departmentModel.findByIdAndDelete(id);
 
     if (!department) {
-    return res.status(404).json({ message: "Department not found" });
+      return res.status(404).json({ message: "Department not found" });
     }
 
     return res.status(200).json({
       message: "Department deleted successfully",
       data: department,
-    });  } catch (error) {
+    });
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
