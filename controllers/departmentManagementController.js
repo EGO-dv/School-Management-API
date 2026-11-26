@@ -14,6 +14,11 @@ exports.createDepartment = async (req, res) => {
 exports.getAllDepartments = async (req, res) => {
   try {
     const departments = await departmentModel.find();
+    if(!departments){
+      return res.status(404).json({
+        message:"Deparrment does not exist"
+      })
+    }
 
     return res.status(200).json({
       message: "Departments fetched successfully",

@@ -5,13 +5,13 @@ const courseRegistrationSchema = new mongoose.Schema(
   {
     student: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Student",
+      ref: "student",
       required: true,
     },
 
     course: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Course",
+      ref: "course",
       required: true,
     },
 
