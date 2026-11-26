@@ -104,6 +104,11 @@ exports.deleteStudent = async(req, res)=>{
 try {
   const studentId = req.params.id
   const removedStudent = await studentModel.findByIdAndDelete(studentId)
+  if(!removedStudent){
+    return res.status(404).json({
+      message:"Student profile already deleted"
+    })
+  }
   res.status(200).json({
     message:"Student removedStudent",
     data: removedStudent
