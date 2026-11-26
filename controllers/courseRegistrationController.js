@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const CourseRegistration = require("../model/courseRegistrationModel");
 
 // POST: Register a student for a course
+
 const registerCourse = async (req, res) => {
   try {
     const { student, course, academicSession, semester } = req.body;
@@ -29,10 +30,17 @@ const registerCourse = async (req, res) => {
       semester,
     });
 
-    res.status(201).json({
+    const populatedRegistration = await CourseRegistration.findById(
+      registration._id
+    )
+      .populate("student")
+      .populate("course");
+
+    return res.status(201).json({
       message: "Course registered successfully",
-      data: registration,
+      data: populatedRegistration,
     });
+
   } catch (error) {
     if (error.code === 11000) {
       return res.status(409).json({
@@ -40,11 +48,13 @@ const registerCourse = async (req, res) => {
       });
     }
 
-    res.status(500).json({
+    return res.status(500).json({
       message: error.message,
     });
   }
 };
+
+
 
 // GET: Get all course registrations
 const getAllRegistrations = async (req, res) => {

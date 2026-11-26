@@ -9,7 +9,7 @@ const {
 } = require("../controllers/departmentManagementController");
 
 router.post("/department", createDepartment);
-router.get("/department", getAllDepartments);
+router.get("/departments", getAllDepartments);
 router.get("/department/:id", getDepartmentById);
 router.put("/department/:id", updateDepartment);
 router.delete("/department/:id", deleteDepartment);
