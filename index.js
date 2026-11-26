@@ -17,7 +17,7 @@ const departmentRouter = require("./routes/departmentRouter");
 
 app.use(studentRoutes);
 app.use(courseRouter);
-app.use(lecturerRouter); 
+app.use(lecturerRouter);
 app.use("/registrations", courseRegRouter);
 app.use(departmentRouter);
 

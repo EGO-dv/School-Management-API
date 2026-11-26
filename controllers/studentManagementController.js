@@ -76,47 +76,47 @@ exports.getOneStudent = async (req, res) => {
   }
 };
 
-exports.updateStudent = async(req, res)=>{
+exports.updateStudent = async (req, res) => {
   try {
     const student = req.params.studentId
-    const data ={
-       email:req.body.email
+    const data = {
+      email: req.body.email
     };
-    const update = await studentModel.findByIdAndUpdate(student,data,{new:true})
-    if (!update){
+    const update = await studentModel.findByIdAndUpdate(student, data, { new: true })
+    if (!update) {
       return res.status(404).json({
-        message:"Student not found"
+        message: "Student not found"
       })
     }
     res.status(200).json({
-      message:"student email updated Successfully",
-      data:update
+      message: "student email updated Successfully",
+      data: update
     })
   } catch (error) {
-     res.status(500).json({
+    res.status(500).json({
       message: "Internal server error",
       error: error.message,
     });
   }
 };
 
-exports.deleteStudent = async(req, res)=>{
-try {
-  const studentId = req.params.id
-  const removedStudent = await studentModel.findByIdAndDelete(studentId)
-  if(!removedStudent){
-    return res.status(404).json({
-      message:"Student profile already deleted"
+exports.deleteStudent = async (req, res) => {
+  try {
+    const studentId = req.params.id
+    const removedStudent = await studentModel.findByIdAndDelete(studentId)
+    if (!removedStudent) {
+      return res.status(404).json({
+        message: "Student profile already deleted"
+      })
+    }
+    res.status(200).json({
+      message: "Student removedStudent",
+      data: removedStudent
     })
-  }
-  res.status(200).json({
-    message:"Student removedStudent",
-    data: removedStudent
-  })
-} catch (error) {
-  res.status(500).json({
+  } catch (error) {
+    res.status(500).json({
       message: "Internal server error",
       error: error.message,
     });
-}
+  }
 }
